@@ -13,7 +13,6 @@ class ProductManager {
             const data = await fs.readFile(this.path, 'utf8');
             return JSON.parse(data);
         } catch (error) {
-            // Si el archivo no existe o hay un error, retornamos un arreglo vacío
             return [];
         }
     }
@@ -40,7 +39,6 @@ class ProductManager {
         product.id = products.length + 1;
         products.push(product);
 
-        // Guarda los productos después de agregar uno nuevo
         this.saveProducts(products);
     }
     async deleteProduct(id) {
@@ -48,7 +46,7 @@ class ProductManager {
         const index = products.findIndex(product => product.id === id);
         if (index !== -1) {
             products.splice(index, 1);
-            this.saveProducts(products); // Guarda los productos después de eliminar uno
+            this.saveProducts(products); 
             console.log(`Producto con ID ${id} eliminado.`);
         } else {
             console.log("Producto no encontrado.");
@@ -59,7 +57,7 @@ class ProductManager {
         const index = products.findIndex(product => product.id === id);
         if (index !== -1) {
             products[index] = { ...products[index], ...updatedProduct };
-            this.saveProducts(products); // Guarda los productos después de actualizar uno
+            this.saveProducts(products); 
             console.log(`Producto con ID ${id} actualizado.`);
         } else {
             console.log("Producto no encontrado.");
